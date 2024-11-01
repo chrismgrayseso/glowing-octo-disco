@@ -17,8 +17,11 @@ function findSourceWithLeastRecentEntry(sources) {
 module.exports = async (logSources, printer) => {
   while (logSources.length !== 0) {
     const source = findSourceWithLeastRecentEntry(logSources);
-    printer.print(source.last);
-    const log = await source.popAsync();
+    const lastLog = source.last;
+    // A slight optimization -- start the promise while the printer is printing.
+    const promise = source.popAsync();
+    printer.print(lastLog);
+    const log = await promise;
     // Remove sources from the list when they are drained.
     if (!log) {
       const index = logSources.indexOf(source);
