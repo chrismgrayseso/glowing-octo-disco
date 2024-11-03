@@ -5,8 +5,8 @@
 // such as https://github.com/ignlg/heap-js
 module.exports = class MinHeap {
   constructor(compareSources) {
-      this.heap = [];
-      this.compareSources = compareSources;
+    this.heap = [];
+    this.compareSources = compareSources;
   }
   // Helper Methods
   getLeftChildIndex(parentIndex) {
@@ -95,7 +95,9 @@ module.exports = class MinHeap {
       ) {
         smallerChildIndex = this.getRightChildIndex(index);
       }
-      if (this.compareSources(this.heap[index], this.heap[smallerChildIndex]) < 0) {
+      if (
+        this.compareSources(this.heap[index], this.heap[smallerChildIndex]) < 0
+      ) {
         break;
       } else {
         this.swap(index, smallerChildIndex);
@@ -103,4 +105,4 @@ module.exports = class MinHeap {
       index = smallerChildIndex;
     }
   }
-}
+};
